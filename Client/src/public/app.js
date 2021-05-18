@@ -1,4 +1,3 @@
-
 function getActorId(actor) {
   return 'actor' + actor.name.split(' ').pop();
 }
@@ -32,16 +31,16 @@ function buildMovieElement(movie) {
 }
 
 const API_URL = 'http://localhost:3000/movies';
-const MOVIES_AND_ACTORS_URL = 'http://localhost:3000/moviesAndActors';
 
-$(document).ready( _ => {
+$(document).ready(_ => {
   console.log('document ready');
-  debugger
+  // debugger
   // fetchDataV1();
   // fetchDataV2();
   fetchDataV3();
 });
 
+// Movies->Movie->actors->actor
 function fetchDataV1() {
   $.get(API_URL, movieLinks => {
     movieLinks.forEach(movieLink => {
@@ -61,6 +60,9 @@ function fetchDataV1() {
   })
 }
 
+const MOVIES_AND_ACTORS_URL = 'http://localhost:3000/moviesAndActors';
+
+// movieとactorを取得するAPIを使用
 function fetchDataV2() {
   $.get(MOVIES_AND_ACTORS_URL, movies => renderRoot(movies));
 }
@@ -91,7 +93,7 @@ const query = `
 
 function fetchDataV3() {
   const url = `http://localhost:5000?query=${query}`;
-  console.log(url);
+  // console.log(url);
   $.get(url, res => {
     console.log(res.data);
     renderRoot(res.data.movies);
